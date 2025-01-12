@@ -45,15 +45,9 @@ export function SearchFilters({
   );
 
   const debouncedSearchInput = useDebounce(searchInput, 500);
-  const debouncedCountryInput = useDebounce(countryInput, 500);
-  const debouncedStateInput = useDebounce(stateInput, 500);
 
   const [countriesList, setCountriesList] = React.useState<Country[]>([]);
   const [stateList, setStateList] = React.useState<State[]>([]);
-
-  React.useEffect(() => {
-    console.log(pathname);
-  }, [pathname]);
 
   // Get a new searchParams string by merging the current
   // searchParams with a provided key/value pair
@@ -72,16 +66,6 @@ export function SearchFilters({
       pathname + "?" + createQueryString("search", debouncedSearchInput)
     );
   }, [debouncedSearchInput]);
-  React.useEffect(() => {
-    router.push(
-      pathname + "?" + createQueryString("country", debouncedCountryInput)
-    );
-  }, [debouncedCountryInput]);
-  React.useEffect(() => {
-    router.push(
-      pathname + "?" + createQueryString("state", debouncedStateInput)
-    );
-  }, [debouncedStateInput]);
 
   React.useEffect(() => {
     GetCountries().then((result) => {
@@ -124,6 +108,9 @@ export function SearchFilters({
                           setStateList([]);
                           setStateInput("");
                           setCountryInput("");
+                          router.push(
+                            pathname + "?" + createQueryString("country", "")
+                          );
                         }}
                         className='opacity-60'
                       >
@@ -137,6 +124,11 @@ export function SearchFilters({
                             key={option.name}
                             onSelect={() => {
                               setCountryInput(option.name);
+                              router.push(
+                                pathname +
+                                  "?" +
+                                  createQueryString("country", option.name)
+                              );
                               // form.setValue("state", undefined as unknown as any);
                               setStateInput("");
 
@@ -211,6 +203,9 @@ export function SearchFilters({
                       <CommandItem
                         onSelect={() => {
                           setStateInput("");
+                          router.push(
+                            pathname + "?" + createQueryString("state", "")
+                          );
                         }}
                         className='opacity-60'
                       >
@@ -224,6 +219,11 @@ export function SearchFilters({
                             key={option.name}
                             onSelect={() => {
                               setStateInput(option.name);
+                              router.push(
+                                pathname +
+                                  "?" +
+                                  createQueryString("state", option.name)
+                              );
                             }}
                           >
                             <span className='flex-1 text-sm'>

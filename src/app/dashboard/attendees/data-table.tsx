@@ -64,10 +64,11 @@ export function RegistrationsTable({
 
   const table = useReactTable({
     data: dataQuery.data?.rows ?? defaultData,
+    pageCount: dataQuery.data?.pageCount ?? -1,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    manualFiltering: true,
+    manualPagination: true,
     onPaginationChange: setPagination,
     state: {
       pagination,
@@ -126,9 +127,16 @@ export function RegistrationsTable({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className='h-24 text-center'
+                  className='h-56 text-center'
                 >
-                  No results.
+                  {dataQuery?.isFetching ? (
+                    <Spinner
+                      className='size-4 mx-auto'
+                      spinnerClass='fill-gray-5'
+                    />
+                  ) : (
+                    "No results."
+                  )}
                 </TableCell>
               </TableRow>
             )}

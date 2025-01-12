@@ -32,7 +32,7 @@ export default async function Page() {
           <div className='h-[104px] px-px flex-col justify-start items-start gap-2.5 flex'>
             <div className='self-stretch h-[104px] flex-col justify-start items-start gap-[7px] flex'>
               <div className='text-center text-[#98a1b2] text-base font-normal  leading-normal'>
-                Total Number of New Converts
+                Total Number of Altar Calls
               </div>
               {/* <div className='justify-start items-center gap-1.5 inline-flex'>
                 <div className='w-6 h-6 relative  overflow-hidden' />

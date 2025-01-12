@@ -47,7 +47,7 @@ export async function getRegistration(
       message:
         response?.response_code == 200
           ? "Registration data retrieved sucessfully"
-          : (response?.message ?? "Something went wrong"),
+          : response?.message ?? "Something went wrong",
     };
   } catch (error) {
     console.error("Error requesting registration data", error);
@@ -90,13 +90,15 @@ export async function getRegistrations(
 
     return {
       rows: response?.data ?? [],
-      pageCount: 1, // TODO: update to use `total_pages`
-      rowCount: response?.count ?? (response?.data ?? [])?.length ?? 0,
+      pageCount: Math.ceil(
+        (response?.count ?? 0) / (params.pagination.pageSize ?? 10)
+      ),
+      rowCount: (response?.data ?? [])?.length ?? 0,
       status: response?.response_code == 200,
       message:
         response?.response_code == 200
           ? "Registrations data retrieved sucessfully"
-          : (response?.message ?? "Something went wrong"),
+          : response?.message ?? "Something went wrong",
     };
   } catch (error) {
     console.error("Error requesting registrations data", error);
