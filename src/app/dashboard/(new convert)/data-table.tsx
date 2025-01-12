@@ -62,8 +62,6 @@ export function NewConvertTable({
 
   const defaultData = React.useMemo(() => _defaultData, [_defaultData]);
 
-  console.log(dataQuery.data, pagination);
-
   const table = useReactTable({
     data: dataQuery.data?.rows ?? defaultData,
     pageCount: dataQuery.data?.pageCount ?? -1,
