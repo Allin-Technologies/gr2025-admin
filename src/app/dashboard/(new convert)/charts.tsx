@@ -221,6 +221,8 @@ export function ServicesMetrics(props: ServicesMetricsProps) {
             return "Third service";
           case "4":
             return "Fourth service";
+          case "21":
+            return "21 Days Fasting and Prayer";
           default:
             return item.name;
         }
@@ -272,6 +274,8 @@ export function ServicesMetrics(props: ServicesMetricsProps) {
                       return "Third service";
                     case "4":
                       return "Fourth service";
+                    case "21":
+                      return "21 Days Fasting and Prayer";
                     default:
                       return item.name;
                   }

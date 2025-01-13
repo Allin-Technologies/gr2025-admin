@@ -70,6 +70,8 @@ export const columns: ColumnDef<NewConvert>[] = [
             ? "Third service"
             : value === "4"
             ? "Fourth service"
+            : value === "21"
+            ? "21 Days Fasting and Prayer"
             : value}
         </span>
       );
