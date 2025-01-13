@@ -11,6 +11,7 @@ import {
 import { auth } from "../../../auth";
 import { getTopCountriesWithOther } from "@/lib/country";
 import { getTopServices } from "@/lib/service";
+import { getTopLocationsAttending } from "@/lib/attending_via";
 
 interface GetNewConverts {
   pagination: PaginationState;
@@ -134,6 +135,10 @@ export async function getNewConvertMetrics(params: {
         result: [],
         count: 0,
       },
+      attending_via: {
+        result: [],
+        count: 0,
+      },
     };
   }
 
@@ -161,6 +166,7 @@ export async function getNewConvertMetrics(params: {
       data: response?.data ?? [],
       countries: getTopCountriesWithOther(response?.data ?? []),
       services: getTopServices(response?.data ?? []),
+      attending_via: getTopLocationsAttending(response?.data ?? []),
     };
   } catch (error) {
     console.error("Error requesting new converts metrics data", error);
@@ -176,6 +182,10 @@ export async function getNewConvertMetrics(params: {
         count: 0,
       },
       services: {
+        result: [],
+        count: 0,
+      },
+      attending_via: {
         result: [],
         count: 0,
       },

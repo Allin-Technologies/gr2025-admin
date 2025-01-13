@@ -7,7 +7,7 @@ import {
   getNewConverts,
   getNewConvertMetrics,
 } from "@/actions/admin/new-converts";
-import { CountriesMetrics, ServicesMetrics } from "../charts";
+import { AttendingVia, CountriesMetrics, ServicesMetrics } from "../charts";
 import { GenderMetrics } from "../charts";
 
 export default async function Page() {
@@ -28,7 +28,7 @@ export default async function Page() {
 
       <Separator />
 
-      <div className='px-4 py-6 justify-start items-start gap-[42px] inline-flex'>
+      <div className='px-4 py-6 justify-start items-start gap-[42px] inline-flex flex-wrap'>
         <div className='w-[230px] h-[321px] flex-col justify-start items-start gap-[30px] inline-flex'>
           <div className='h-[104px] px-px flex-col justify-start items-start gap-2.5 flex'>
             <div className='self-stretch h-[104px] flex-col justify-start items-start gap-[7px] flex'>
@@ -105,6 +105,13 @@ export default async function Page() {
             Services
           </h2>
           <ServicesMetrics {...metrics} />
+          <div className='h-12'></div>
+        </div>
+        <div className='px-2'>
+          <h2 className='text-left text-[#98a1b2] text-base font-normal  leading-normal'>
+            Attending via
+          </h2>
+          <AttendingVia {...metrics} />
           <div className='h-12'></div>
         </div>
       </div>

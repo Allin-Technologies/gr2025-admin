@@ -45,7 +45,7 @@ export function GenderMetrics(props: GenderMetricsProps) {
   ];
 
   return (
-    <div className='flex-1 pb-0 w-[234px]'>
+    <div className='flex-1 pb-0 w-[284px]'>
       <ChartContainer
         config={chartConfig}
         className='mx-auto aspect-square max-h-[250px]'
@@ -120,7 +120,7 @@ export function CountriesMetrics(props: CountriesMetricsProps) {
 
   return (
     <div className='flex'>
-      <div className='flex-1 pb-0 w-[234px]'>
+      <div className='flex-1 pb-0 w-[284px]'>
         <ChartContainer
           config={chartConfig}
           className='mx-auto aspect-square max-h-[250px]'
@@ -206,13 +206,33 @@ export function ServicesMetrics(props: ServicesMetricsProps) {
 
   // Dynamic chart config
   const chartConfig: ChartConfig = chartData.reduce((config, item) => {
-    config[item.name] = { label: item.name, color: item.fill };
+    config[item.name] = {
+      label: (() => {
+        switch (item.name) {
+          case undefined:
+          case null:
+          case "":
+            return " - ";
+          case "1":
+            return "First service";
+          case "2":
+            return "Second service";
+          case "3":
+            return "Third service";
+          case "4":
+            return "Fourth service";
+          default:
+            return item.name;
+        }
+      })(),
+      color: item.fill,
+    };
     return config;
   }, {} as ChartConfig);
 
   return (
     <div className='flex'>
-      <div className='flex-1 pb-0 w-[234px]'>
+      <div className='flex-1 pb-0 w-[284px]'>
         <ChartContainer
           config={chartConfig}
           className='mx-auto aspect-square max-h-[250px]'
@@ -256,6 +276,101 @@ export function ServicesMetrics(props: ServicesMetricsProps) {
                       return item.name;
                   }
                 })()}
+              </span>
+            </div>
+            <span className='text-right text-[#101828] text-sm font-medium'>
+              {item?.value?.toLocaleString()}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+interface AttendingViaProps {
+  attending_via: {
+    result: {
+      service: string;
+      count: number;
+    }[];
+    count: number;
+  };
+}
+
+export function AttendingVia(props: AttendingViaProps) {
+  function getDynamicColor(name: string, index: number): string {
+    const colors = [
+      "#E9D8FD", // Lightest purple
+      "#D6BCFA", // Light purple
+      "#B794F4", // Moderate purple
+      "#9F7AEA", // Strong purple
+      "#805AD5", // Deep purple
+      "#6B46C1", // Darkest purple
+    ];
+    return colors[index % colors.length]; // Cycle through colors if index exceeds palette size
+  }
+
+  // Extract services data
+  const { result } = props.attending_via;
+
+  // Transform data to top 5 services + 'Other'
+  const sortedData = [...result].sort((a, b) => b.count - a.count);
+  const topServices = sortedData.slice(0, 5);
+  const otherCount = sortedData
+    .slice(5)
+    .reduce((sum, item) => sum + item.count, 0);
+
+  // Final chart data
+  const chartData = [
+    ...topServices.map((item, index) => ({
+      name: item.service,
+      value: item.count,
+      fill: getDynamicColor(item.service, index), // Helper to assign colors
+    })),
+    ...(otherCount > 0
+      ? [{ name: "Other", value: otherCount, fill: "#cccccc" }]
+      : []),
+  ];
+
+  // Dynamic chart config
+  const chartConfig: ChartConfig = chartData.reduce((config, item) => {
+    config[item.name] = {
+      label: item.name,
+      color: item.fill,
+    };
+    return config;
+  }, {} as ChartConfig);
+
+  return (
+    <div className='flex'>
+      <div className='flex-1 pb-0 w-[284px]'>
+        <ChartContainer
+          config={chartConfig}
+          className='mx-auto aspect-square max-h-[250px]'
+        >
+          <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Pie data={chartData} dataKey='value' nameKey='name' stroke='0' />
+          </PieChart>
+        </ChartContainer>
+      </div>
+      <div className='my-auto w-40 space-y-2'>
+        {chartData?.map((item, index) => (
+          <div
+            key={index}
+            className='flex justify-between items-center gap-2 w-full'
+          >
+            <div className='justify-start items-center gap-2 flex'>
+              <div
+                className='w-2 h-2 rounded-full'
+                style={{ background: item.fill }}
+              />
+              <span className='text-[#667185] text-sm font-normal'>
+                {item.name}
               </span>
             </div>
             <span className='text-right text-[#101828] text-sm font-medium'>
