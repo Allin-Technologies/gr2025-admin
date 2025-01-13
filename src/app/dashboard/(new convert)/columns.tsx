@@ -38,7 +38,7 @@ export const columns: ColumnDef<NewConvert>[] = [
     cell({ row }) {
       const value: string = row.getValue("date_of_birth");
 
-      return <span>{value ? format(value, "dd MMMM") : " - "}</span>;
+      return <span>{value ? format(value, "do MMMM") : " - "}</span>;
     },
   },
   {
