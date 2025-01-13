@@ -10,6 +10,7 @@ import {
 } from "@/lib/zod";
 import { auth } from "../../../auth";
 import { getTopCountriesWithOther } from "@/lib/country";
+import { getTopServices } from "@/lib/service";
 
 interface GetNewConverts {
   pagination: PaginationState;
@@ -129,6 +130,10 @@ export async function getNewConvertMetrics(params: {
         result: [],
         count: 0,
       },
+      services: {
+        result: [],
+        count: 0,
+      },
     };
   }
 
@@ -155,6 +160,7 @@ export async function getNewConvertMetrics(params: {
         response?.data?.filter((nc) => nc.gender !== "Nigeria")?.length ?? 0,
       data: response?.data ?? [],
       countries: getTopCountriesWithOther(response?.data ?? []),
+      services: getTopServices(response?.data ?? []),
     };
   } catch (error) {
     console.error("Error requesting new converts metrics data", error);
@@ -166,6 +172,10 @@ export async function getNewConvertMetrics(params: {
       outside_nigeria: 0,
       data: [],
       countries: {
+        result: [],
+        count: 0,
+      },
+      services: {
         result: [],
         count: 0,
       },

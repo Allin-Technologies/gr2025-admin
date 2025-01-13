@@ -7,7 +7,7 @@ import {
   getNewConverts,
   getNewConvertMetrics,
 } from "@/actions/admin/new-converts";
-import { CountriesMetrics } from "../charts";
+import { CountriesMetrics, ServicesMetrics } from "../charts";
 import { GenderMetrics } from "../charts";
 
 export default async function Page() {
@@ -22,7 +22,7 @@ export default async function Page() {
       <div className='p-4 pb-0 flex gap-3 items-center'>
         <SidebarTrigger />
         <h1 className='text-[#2b2b2b] text-lg font-semibold leading-7'>
-          Altar Call
+          First Timers
         </h1>
       </div>
 
@@ -98,6 +98,13 @@ export default async function Page() {
             Countries
           </h2>
           <CountriesMetrics {...metrics} />
+          <div className='h-12'></div>
+        </div>
+        <div className='px-2'>
+          <h2 className='text-left text-[#98a1b2] text-base font-normal  leading-normal'>
+            Services
+          </h2>
+          <ServicesMetrics {...metrics} />
           <div className='h-12'></div>
         </div>
       </div>

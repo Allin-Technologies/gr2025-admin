@@ -1,12 +1,9 @@
 export function getTopCountriesWithOther(data: { country: string }[]) {
   // Step 1: Count occurrences of each country
-  const countryCount = data.reduce(
-    (acc, entry) => {
-      acc[entry.country] = (acc[entry.country] || 0) + 1;
-      return acc;
-    },
-    {} as Record<string, number>
-  );
+  const countryCount = data.reduce((acc, entry) => {
+    acc[entry.country] = (acc[entry.country] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
 
   // Step 2: Sort countries by count in descending order
   const sortedCountries = Object.entries(countryCount).sort(

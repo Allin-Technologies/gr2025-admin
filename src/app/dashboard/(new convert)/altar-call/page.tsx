@@ -7,7 +7,7 @@ import {
   getNewConverts,
   getNewConvertMetrics,
 } from "@/actions/admin/new-converts";
-import { CountriesMetrics, GenderMetrics } from "../charts";
+import { CountriesMetrics, GenderMetrics, ServicesMetrics } from "../charts";
 
 export default async function Page() {
   const metrics = await getNewConvertMetrics({ reg_type: "alter_call" });
@@ -97,6 +97,13 @@ export default async function Page() {
             Countries
           </h2>
           <CountriesMetrics {...metrics} />
+          <div className='h-12'></div>
+        </div>
+        <div className='px-2'>
+          <h2 className='text-left text-[#98a1b2] text-base font-normal  leading-normal'>
+            Services
+          </h2>
+          <ServicesMetrics {...metrics} />
           <div className='h-12'></div>
         </div>
       </div>
