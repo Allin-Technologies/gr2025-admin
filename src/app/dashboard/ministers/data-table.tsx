@@ -26,6 +26,7 @@ import { filterRegistrationsByTimeline } from "@/lib/table-timeline";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { useSearchParams } from "next/navigation";
+import { checkInMinister } from "@/actions/admin/checkIn";
 
 interface RegistrationsTableProps {
   reg_type: "attendee" | "minister";
@@ -75,6 +76,10 @@ export function RegistrationsTable({
     },
   });
 
+  function handleCheckIn() {
+    console.log("Check in");
+  }
+
   return (
     <div className='space-y-5'>
       <Portal targetId='table___timeline__' className='flex gap-3 item-center'>
@@ -102,6 +107,9 @@ export function RegistrationsTable({
                     </TableHead>
                   );
                 })}
+                <TableRow>
+                  Action
+                </TableRow>
               </TableRow>
             ))}
           </TableHeader>
@@ -121,6 +129,12 @@ export function RegistrationsTable({
                       )}
                     </TableCell>
                   ))}
+                  <TableRow className="flex justify-center items-center">
+                    <Button
+                      className="text-white h-[30px] mt-1"
+                      onClick={() => checkInMinister({id:row.original._id, checkIn:true})}
+                    >Check in</Button>
+                  </TableRow>
                 </TableRow>
               ))
             ) : (
