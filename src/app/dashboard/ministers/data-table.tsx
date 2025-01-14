@@ -27,6 +27,7 @@ import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { useSearchParams } from "next/navigation";
 import { checkInMinister } from "@/actions/admin/checkIn";
+import toast from "react-hot-toast";
 
 interface RegistrationsTableProps {
   reg_type: "attendee" | "minister";
@@ -75,10 +76,6 @@ export function RegistrationsTable({
       pagination,
     },
   });
-
-  function handleCheckIn() {
-    console.log("Check in");
-  }
 
   return (
     <div className='space-y-5'>
@@ -130,10 +127,26 @@ export function RegistrationsTable({
                     </TableCell>
                   ))}
                   <TableRow className="flex justify-center items-center">
-                    <Button
-                      className="text-white h-[30px] mt-1"
-                      onClick={() => checkInMinister({id:row.original._id, checkIn:true})}
-                    >Check in</Button>
+                    {row.original.minister_checked_in ? 
+                      <Button
+                        className="text-white h-[30px] mt-1 bg-gray-600"
+                      >Checked in</Button> :
+                       <Button
+                        className="text-white h-[30px] mt-1"
+                        onClick={() => checkInMinister({id:row.original._id, checkIn:true})
+                        .then(() => {
+                          toast(`${row.original.first_name} ${row.original.last_name} has been checked in successfully`)
+                          getRegistrations({
+                            reg_type,
+                            pagination,
+                            search: search ?? undefined,
+                            country: country ?? undefined,
+                            state: state ?? undefined,
+                          })
+                        })
+                        .catch(() => toast.error("Something went wrong"))}
+                      >Check in</Button>
+                  }
                   </TableRow>
                 </TableRow>
               ))

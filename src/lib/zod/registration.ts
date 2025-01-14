@@ -15,6 +15,8 @@ export const registrationResponseSchema = z.object({
   state_of_ministry: z.string().optional(),
   minister_status: z.boolean().optional(),
   name_of_ministry: z.string().optional(),
+  role_in_ministry: z.string().optional(),
+  minister_checked_in: z.boolean().optional(),
   attending_via: z.string().optional(),
   updatedAt: z.string().datetime().optional(),
   createdAt: z.string().datetime().optional(),

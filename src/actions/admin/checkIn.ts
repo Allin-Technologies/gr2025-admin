@@ -20,10 +20,6 @@ export async function checkInMinister({ id, checkIn }: CheckInMinister) {
     };
   }
 
-  const responseValidator = z.object({
-    minister_checked_in: z.boolean(),
-  });
-
   try {
     const response = await api(z.any(), {
       url: `/admin/registrations/${id}`,
@@ -35,8 +31,6 @@ export async function checkInMinister({ id, checkIn }: CheckInMinister) {
         Authorization: `Bearer ${session.user.access_token}`,
       },
     });
-
-    // console.log(response)
 
     if (response.response_code === 200) {
     
