@@ -91,6 +91,10 @@ export const columns: ColumnDef<Registration>[] = [
     },
   },
   {
+    accessorKey: "role",
+    header: "Role",
+  },
+  {
     accessorKey: "name_of_ministry",
     header: "Ministry",
   },
