@@ -11,7 +11,7 @@ import {
   Headphones,
   Home,
   LogOut,
-  // MapPinHouseIcon,
+  MapPinHouseIcon,
   Mic2,
   // Text,
 } from "lucide-react";
@@ -62,6 +62,12 @@ const data = {
       url: "/dashboard/ministers",
       icon: Mic2,
       role: ["admin", "minister"],
+    },
+    {
+      title: "Guests",
+      url: "/dashboard/guests",
+      icon: MapPinHouseIcon,
+      role: ["admin", "guest"],
     },
     {
       title: "Altar Call",

@@ -12,7 +12,7 @@ import { auth } from "../../../auth";
 import { getTopCountriesWithOther } from "@/lib/country";
 
 interface GetRegistrations {
-  reg_type: "attendee" | "minister";
+  reg_type: "attendee" | "guest" | "minister";
   pagination: PaginationState;
   search?: string;
   country?: string;
@@ -115,7 +115,7 @@ export async function getRegistrations(
 export async function getRegistrationMetrics({
   reg_type,
 }: {
-  reg_type?: "attendee" | "minister";
+  reg_type?: "attendee" | "guest" | "minister";
 }) {
   const session = await auth();
 
