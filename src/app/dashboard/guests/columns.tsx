@@ -24,14 +24,6 @@ export const columns: ColumnDef<Registration>[] = [
     header: "Country",
   },
   {
-    accessorKey: "country_of_ministry",
-    header: "Country of ministry",
-  },
-  {
-    accessorKey: "state_of_ministry",
-    header: "State of ministry",
-  },
-  {
     accessorKey: "phone_number",
     header: "Phone Number",
   },
@@ -58,44 +50,11 @@ export const columns: ColumnDef<Registration>[] = [
     },
   },
   {
-    accessorKey: "minister_status",
-    header: "Minister",
-    cell({ row }) {
-      const value: boolean = row.getValue("minister_status");
-
-      if (value === false)
-        return (
-          <div className='h-6 px-2 py-1 bg-[#fbeae9] rounded-xl flex-col justify-center items-center gap-2 inline-flex'>
-            <div className='justify-center items-center inline-flex'>
-              <div className='px-1 justify-center items-center flex'>
-                <span className='text-center text-[#d3251f] text-xs font-medium'>
-                  No
-                </span>
-              </div>
-            </div>
-          </div>
-        );
-      else if (value == true)
-        return (
-          <div className='h-6 px-2 py-1 bg-[#e7f6ec] rounded-xl flex-col justify-center items-center gap-2 inline-flex'>
-            <div className='justify-center items-center inline-flex'>
-              <div className='px-1 justify-center items-center flex'>
-                <span className='text-center text-[#036b26] text-xs font-medium'>
-                  Yes
-                </span>
-              </div>
-            </div>
-          </div>
-        );
-      else return <span>-</span>;
-    },
+    accessorKey: "organization_name",
+    header: "Organization",
   },
   {
-    accessorKey: "role_in_ministry",
+    accessorKey: "role_at_organization",
     header: "Role",
-  },
-  {
-    accessorKey: "name_of_ministry",
-    header: "Ministry",
   },
 ];

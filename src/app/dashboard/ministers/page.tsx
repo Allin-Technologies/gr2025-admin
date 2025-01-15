@@ -63,6 +63,16 @@ export default async function Page() {
               </div>
             </div>
           </div>
+        <div className='flex-col justify-start items-start gap-7 flex'>
+            <div className='flex-col justify-start items-start flex'>
+              <div className='text-center text-[#98a1b2] text-base font-normal  leading-normal'>
+                Checked In Guest
+              </div>
+              <div className='text-neutral-900 text-[43px] font-semibold  leading-[43px]'>
+                {metrics?.checked_in?.minister_checked_in}
+              </div>
+            </div>
+          </div>
         </div>
         <div className='px-2'>
           <h2 className='text-left text-[#98a1b2] text-base font-normal leading-normal'>
