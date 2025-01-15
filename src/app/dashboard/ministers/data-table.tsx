@@ -129,10 +129,10 @@ export function RegistrationsTable({
                   <TableRow className="flex justify-center items-center">
                     {row.original.minister_checked_in ? 
                       <Button
-                        className="text-white h-[30px] mt-1 bg-gray-600"
+                        className="text-white h-[30px] mt-1 bg-gray-600 text-nowrap"
                       >Checked in</Button> :
                        <Button
-                        className="text-white h-[30px] mt-1"
+                        className="text-white h-[30px] mt-1 text-nowrap"
                         onClick={() => checkInMinister({id:row.original._id, checkIn:true})
                         .then(() => {
                           toast(`${row.original.first_name} ${row.original.last_name} has been checked in successfully`)
