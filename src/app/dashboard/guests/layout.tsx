@@ -8,7 +8,7 @@ export default async function Layout({
 }) {
   const session = await auth();
 
-  if (session?.user?.role !== "admin" && session?.user?.role !== "guest")
+  if (session?.user?.role !== "admin" && session?.user?.role !== "minister")
     notFound();
 
   return children;
