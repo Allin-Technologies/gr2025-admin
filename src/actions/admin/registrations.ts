@@ -10,6 +10,7 @@ import {
 } from "@/lib/zod";
 import { auth } from "../../../auth";
 import { getTopCountriesWithOther } from "@/lib/country";
+import { getCheckedInCount } from "@/lib/checked_in";
 
 interface GetRegistrations {
   reg_type: "attendee" | "guest" | "minister";
@@ -131,6 +132,10 @@ export async function getRegistrationMetrics({
         result: [],
         count: 0,
       },
+      checked_in:  {
+        minister_checked_in: 0,
+        guest_checked_in: 0
+      },
       attending: [],
     };
   }
@@ -159,6 +164,7 @@ export async function getRegistrationMetrics({
       data: response?.data ?? [],
       countries: getTopCountriesWithOther(response?.data ?? []),
       attending: getUniqueAttendingVia(response?.data ?? []),
+      checked_in: getCheckedInCount(response?.data ?? [])
     };
   } catch (error) {
     console.error("Error requesting new converts metrics data", error);

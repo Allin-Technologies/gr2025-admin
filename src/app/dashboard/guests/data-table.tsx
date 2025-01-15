@@ -26,7 +26,7 @@ import { filterRegistrationsByTimeline } from "@/lib/table-timeline";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { useSearchParams } from "next/navigation";
-import { checkInMinister } from "@/actions/admin/checkIn";
+import { checkInGuest } from "@/actions/admin/checkIn";
 import toast from "react-hot-toast";
 
 interface RegistrationsTableProps {
@@ -113,7 +113,7 @@ export function RegistrationsTable({
 
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+              table.getRowModel().rows.map((row) =>(
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
@@ -127,13 +127,13 @@ export function RegistrationsTable({
                     </TableCell>
                   ))}
                   <TableRow className="flex justify-center items-center">
-                    {row.original.minister_checked_in ? 
+                    {row.original.guest_checked_in ? 
                       <Button
                         className="text-white h-[30px] mt-1 bg-gray-600 text-nowrap"
                       >Checked in</Button> :
                        <Button
                         className="text-white h-[30px] mt-1 text-nowrap"
-                        onClick={() => checkInMinister({id:row.original._id, checkIn:true})
+                        onClick={() => checkInGuest({id:row.original._id, checkIn:true})
                         .then(() => {
                           toast(`${row.original.first_name} ${row.original.last_name} has been checked in successfully`)
                           getRegistrations({
